@@ -12,7 +12,10 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        return Department::all();
+        return response()->json([
+            'success' => true,
+            'departments' => Department::all(),
+        ]);
     }
 
     /**
@@ -21,8 +24,8 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'department' => 'required|string|max:20',
-            'code' => 'required|string|max:5',
+            'department' => 'required|string|unique|max:20',
+            'code' => 'required|string|unique|max:5',
             'certificate_id' => 'required|integer',
         ]);
         $department = Department::firstOrCreate($validated);
@@ -50,8 +53,8 @@ class DepartmentController extends Controller
     public function update(Request $request, Department $department)
     {
         $validated = $request->validate([
-            'department' => 'required|string|max:20',
-            'code' => 'required|string|max:5',
+            'department' => 'required|string|unique|max:20',
+            'code' => 'required|string|unique|max:5',
             'certificate_id' => 'required|integer',
         ]);
         $department->update($validated);

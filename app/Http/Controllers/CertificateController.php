@@ -12,7 +12,10 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        return Certificate::all();
+        return response()->json([
+            'success' => true,
+            'certificates' => Certificate::all(),
+        ]);
     }
 
     /**

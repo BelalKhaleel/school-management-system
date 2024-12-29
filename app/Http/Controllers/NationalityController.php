@@ -14,7 +14,10 @@ class NationalityController extends Controller
     {
         $nationalities = Nationality::all();
         if (!($nationalities->isEmpty())) {
-            return response()->json(['success' => true, 'nationalities' => $nationalities]);
+            return response()->json([
+                'success' => true, 
+                'nationalities' => $nationalities,
+            ]);
         }
     }
 
@@ -24,7 +27,7 @@ class NationalityController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nationality' => 'required|string|max:23',
+            'nationality' => 'required|string|unique|max:23',
         ]);
 
         Nationality::firstOrCreate($validated);
@@ -46,7 +49,7 @@ class NationalityController extends Controller
     public function update(Request $request, Nationality $nationality)
     {
         $validated = $request->validate([
-            'nationality' => 'required|string|max:23',
+            'nationality' => 'required|string|unique|max:23',
         ]);
 
         $nationality->update($validated);

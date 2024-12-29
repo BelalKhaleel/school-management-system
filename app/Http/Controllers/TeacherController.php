@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
 
-class StudentController extends Controller
+class TeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class StudentController extends Controller
     {
         return response()->json([
             'success' => true,
-            'students' => Student::all(),
+            'teachers' => Teacher::all(),
         ]);
     }
 
@@ -43,29 +43,29 @@ class StudentController extends Controller
             'nationality_id' => 'required|integer|max_digits:2',
         ]);
         $validated['password'] = bcrypt($validated['password']);
-        $student = Student::create($validated);
+        $teacher = Teacher::create($validated);
         return response()->json([
             'success' => true,
-            'message' => 'Student created successfully',
-            'student' => $student,
+            'message' => 'Teacher created successfully',
+            'teacher' => $teacher,
         ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Student $student)
+    public function show(Teacher $teacher)
     {
         return response()->json([
             'success' => true,
-            'student' => $student,
+            'student' => $teacher,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, Teacher $teacher)
     {
         $validated = $request->validate([
             'first_name' => 'required|string|max:20',
@@ -86,23 +86,23 @@ class StudentController extends Controller
             'nationality_id' => 'required|integer|max_digits:2',
         ]);
         $validated['password'] = bcrypt($validated['password']);
-        $student->update($validated);
+        $teacher->update($validated);
         return response()->json([
             'success' => true,
-            'message' => 'Student updated successfully',
-            'student' => $student,
+            'message' => 'Teacher updated successfully',
+            'teacher' => $teacher,
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Student $student)
+    public function destroy(Teacher $teacher)
     {
-        $student->delete();
+        $teacher->delete();
         return response()->json([
             'success' => true,
-            'message' => 'Student deleted successfully',
+            'message' => 'Teacher deleted successfully',
         ]);
     }
 }

@@ -12,7 +12,10 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return Subject::all();
+        return response()->json([
+            'success' => true,
+            'subjects' => Subject::all(),
+        ]);
     }
 
     /**
@@ -21,7 +24,7 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'subject' => 'required|string|max:20',
+            'subject' => 'required|string|unique|max:20',
         ]);
 
         $subject = Subject::firstOrCreate($validated);
@@ -46,7 +49,7 @@ class SubjectController extends Controller
     public function update(Request $request, Subject $subject)
     {
         $validated = $request->validate([
-            'subject' => 'required|string|max:20',
+            'subject' => 'required|string|unique|max:20',
         ]);
         
         $subject->update($validated);

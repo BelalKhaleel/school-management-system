@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             GenderSeeder::class,
             LanguageSeeder::class,
             StudentSeeder::class,
+            TeacherSeeder::class,
         ]);
     }
 }

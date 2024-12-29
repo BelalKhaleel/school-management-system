@@ -12,7 +12,10 @@ class SectionController extends Controller
      */
     public function index()
     {
-        return Section::all();
+        return response()->json([
+            'success' => true,
+            'sections' => Section::all(),
+        ]);
     }
 
     /**
@@ -21,7 +24,7 @@ class SectionController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'section' => 'required|string|max:20',
+            'section' => 'required|string|unique|max:20',
         ]);
 
         $section = Section::firstOrCreate($validated);
@@ -46,7 +49,7 @@ class SectionController extends Controller
     public function update(Request $request, Section $section)
     {
         $validated = $request->validate([
-            'section' => 'required|string|max:20',
+            'section' => 'required|string|unique|max:20',
         ]);
         
         $section->update($validated);

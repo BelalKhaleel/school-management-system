@@ -14,7 +14,10 @@ class LanguageController extends Controller
     {
         $languages = Language::all();
         if (!($languages->isEmpty())) {
-            return response()->json(['success' => true, 'languages' => $languages]);
+            return response()->json([
+                'success' => true, 
+                'languages' => $languages,
+            ]);
         }
     }
 
@@ -24,7 +27,7 @@ class LanguageController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nationality' => 'required|string|max:11',
+            'nationality' => 'required|string|unique|max:11',
         ]);
 
         Language::firstOrCreate($validated);
@@ -46,7 +49,7 @@ class LanguageController extends Controller
     public function update(Request $request, Language $language)
     {
         $validated = $request->validate([
-            'language' => 'required|string|max:11',
+            'language' => 'required|string|unique|max:11',
         ]);
 
         $language->update($validated);

@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\Section;
 use App\Models\Student;
 use App\Models\Subject;
+use App\Models\Teacher;
 use App\Models\Language;
 use App\Models\Department;
 use App\Models\Certificate;
@@ -24,6 +25,7 @@ Route::apiResources([
     'sections', Section::class,
     'students', Student::class,
     'subjects', Subject::class,
+    'teachers', Teacher::class,
     'terms', Term::class,
     'users', User::class,
 ]);
