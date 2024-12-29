@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('terms', function (Blueprint $table) {
+        Schema::create('certificate_department', function (Blueprint $table) {
             $table->id();
-            $table->string('term', 20);
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->foreignId('certificate_id')->constrained();
+            $table->foreignId('department_id')->constrained();
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('terms');
+        Schema::dropIfExists('certificate_department');
     }
 };

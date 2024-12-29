@@ -2,11 +2,13 @@
 
 use App\Models\Term;
 use App\Models\User;
+use App\Models\Grade;
 use App\Models\Section;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\Language;
+use App\Models\Classroom;
 use App\Models\Department;
 use App\Models\Certificate;
 use App\Models\Nationality;
@@ -19,7 +21,9 @@ Route::get('/user', function (Request $request) {
 
 Route::apiResources([
     'certificates', Certificate::class,
+    'classrooms', Classroom::class,
     'departments', Department::class,
+    'grades', Grade::class,
     'languages', Language::class,
     'nationalities', Nationality::class,
     'sections', Section::class,

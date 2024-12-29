@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Gender;
+use App\Models\Classroom;
 use App\Models\Nationality;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,6 +24,7 @@ class StudentFactory extends Factory
         $first_name = $gender === 'male' ? fake()->firstNameMale() : fake()->firstNameFemale();
         $last_name = fake()->lastName();
         $nationality_id = Nationality::inRandomOrder()->first()->id;
+        $Classroom_id = Classroom::inRandomOrder()->first()->id;
 
         return [
             'first_name' => $first_name,
@@ -33,7 +35,6 @@ class StudentFactory extends Factory
             'address' => fake()->address(),
             'date_of_birth' => fake()->dateTimeBetween('-20 years', '-4 years')->format('Y-m-d'),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => fake()->password(8, 20),
             'gender_id' => $gender_id,
             'nationality_id' => $nationality_id,

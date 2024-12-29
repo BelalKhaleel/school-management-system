@@ -27,7 +27,7 @@ class NationalityController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nationality' => 'required|string|unique|max:23',
+            'nationality' => 'required|string|unique|max:30',
         ]);
 
         Nationality::firstOrCreate($validated);

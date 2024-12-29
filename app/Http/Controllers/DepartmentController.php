@@ -24,7 +24,7 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'department' => 'required|string|unique|max:20',
+            'department' => 'required|string|unique|max:25',
             'code' => 'required|string|unique|max:5',
             'certificate_id' => 'required|integer',
         ]);
@@ -53,7 +53,7 @@ class DepartmentController extends Controller
     public function update(Request $request, Department $department)
     {
         $validated = $request->validate([
-            'department' => 'required|string|unique|max:20',
+            'department' => 'required|string|unique|max:25',
             'code' => 'required|string|unique|max:5',
             'certificate_id' => 'required|integer',
         ]);

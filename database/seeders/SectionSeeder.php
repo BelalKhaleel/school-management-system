@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Section;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SectionSeeder extends Seeder
 {
@@ -12,6 +13,14 @@ class SectionSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $sections = [
+            'A',
+            'B',
+            'C',
+        ];
+
+        foreach($sections as $section) {
+            Section::firstOrCreate(['section' => $section]);
+        }
     }
 }

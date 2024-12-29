@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->string('department', 20)->unique();
+            $table->string('department', 25)->unique();
             $table->string('code', 5)->unique()->nullable();
-            $table->foreignId('certificate_id')->constrained();
             $table->timestamps();
         });
     }

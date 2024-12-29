@@ -5,21 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Department extends Model
 {
     protected $guarded = ['id'];
 
-    protected $casts = [
-        'certificate_id' => 'integer',
-    ];
-
     /**
      * Get the certificate associated with the department.
      */
-    public function certificate(): HasOne
+    public function certificates(): HasMany
     {
-        return $this->hasOne(Certificate::class);
+        return $this->hasMany(Certificate::class);
     }
 
     public function subjects(): BelongsToMany

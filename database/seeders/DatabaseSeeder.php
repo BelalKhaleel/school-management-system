@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Department;
 use Illuminate\Database\Seeder;
 use Database\Seeders\LanguageSeeder;
 
@@ -14,9 +15,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            UserSeeder::class,
             GenderSeeder::class,
             LanguageSeeder::class,
+            NationalitySeeder::class,
+            UserSeeder::class,
+            CertificateSeeder::class,
+            TermSeeder::class,
+            DepartmentSeeder::class,
             StudentSeeder::class,
             TeacherSeeder::class,
         ]);

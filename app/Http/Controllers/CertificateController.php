@@ -24,7 +24,7 @@ class CertificateController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'certificate' => 'required|string|max:20',
+            'certificate' => 'required|string|unique|max:20',
         ]);
 
         $certificate = Certificate::firstOrCreate($validated);
@@ -49,7 +49,7 @@ class CertificateController extends Controller
     public function update(Request $request, Certificate $certificate)
     {
         $validated = $request->validate([
-            'certificate' => 'required|string|max:20',
+            'certificate' => 'required|string|unique|max:20',
         ]);
         
         $certificate->update($validated);

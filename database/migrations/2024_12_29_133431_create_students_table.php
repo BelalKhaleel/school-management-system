@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('password', 20);
             $table->foreignId('gender_id')->constrained();
             $table->foreignId('nationality_id')->constrained();
-            $table->foreignId('class_id')->constrained();
+            $table->foreignId('classroom_id')->constrained();
             $table->timestamps();
         });
     }
