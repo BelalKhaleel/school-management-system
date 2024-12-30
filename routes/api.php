@@ -20,16 +20,16 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::apiResources([
-    'certificates', Certificate::class,
-    'classrooms', Classroom::class,
-    'departments', Department::class,
-    'grades', Grade::class,
-    'languages', Language::class,
-    'nationalities', Nationality::class,
-    'sections', Section::class,
-    'students', Student::class,
-    'subjects', Subject::class,
-    'teachers', Teacher::class,
-    'terms', Term::class,
-    'users', User::class,
+    'certificates'=> Certificate::class,
+    'classrooms'=> Classroom::class,
+    'departments'=> Department::class,
+    'grades'=> Grade::class,
+    'languages'=> Language::class,
+    'nationalities'=> Nationality::class,
+    'sections'=> Section::class,
+    'students'=> Student::class,
+    'subjects'=> Subject::class,
+    'teachers'=> Teacher::class,
+    'terms'=> Term::class,
+    'users'=> User::class,
 ]);
