@@ -18,6 +18,7 @@ class SubjectSeeder extends Seeder
             "Art",
             "Biology",
             "Chemistry",
+            "Civics",
             "Computer Science",
             "Economics",
             "English",
@@ -30,6 +31,7 @@ class SubjectSeeder extends Seeder
             "Physical Education",
             "Physics",
             "Science",
+            "Social Studies",
             "Sociology",
         ];
         foreach($subjects as $subject) {
