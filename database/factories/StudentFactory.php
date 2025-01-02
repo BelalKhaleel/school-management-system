@@ -35,7 +35,7 @@ class StudentFactory extends Factory
             'address' => fake()->address(),
             'date_of_birth' => fake()->dateTimeBetween('-20 years', '-4 years')->format('Y-m-d'),
             'email' => fake()->unique()->safeEmail(),
-            'password' => fake()->password(8, 20),
+            'password' => bcrypt(fake()->password(8, 20)),
             'gender_id' => $gender_id,
             'nationality_id' => $nationality_id,
         ];

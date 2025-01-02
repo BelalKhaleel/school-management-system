@@ -36,8 +36,8 @@ class DatabaseSeeder extends Seeder
             SubjectSeeder::class,
             CertificateDepartmentSeeder::class,
             CertificateSubjectSeeder::class,
-            StudentSeeder::class,
             TeacherSeeder::class,
+            StudentSeeder::class,
         ]);   
     }
 }

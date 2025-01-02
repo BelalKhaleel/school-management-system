@@ -23,33 +23,19 @@ class CertificateSubjectSeeder extends Seeder
         $middle_school_subject_ids = Subject::whereIn('subject', ['Arabic', 'Biology', 'Chemistry', 'Computer Science', 'Geography', 'History', 'Mathematics', 'Physical Education', 'Physics'])->pluck('id');
         $high_school_subject_ids = Subject::whereIn('subject', ['Arabic', 'Biology', 'Chemistry', 'Computer Science', 'Economics', 'Geography', 'History', 'Mathematics', 'Philosophy', 'Physical Education', 'Physics', 'Sociology'])->pluck('id');
 
-        $data = [];
-
         foreach ($elementary_school_ids as $certificate_id) {
-            foreach ($elementary_school_subject_ids as $subject_id) {
-                $data[] = [
-                    'certificate_id' => $certificate_id,
-                    'subject_id' => $subject_id,
-                ];
-            }
+            $certificate = Certificate::find($certificate_id);
+            $certificate->subjects()->sync($elementary_school_subject_ids);
         }
+
         foreach ($middle_school_ids as $certificate_id) {
-            foreach ($middle_school_subject_ids as $subject_id) {
-                $data[] = [
-                    'certificate_id' => $certificate_id,
-                    'subject_id' => $subject_id,
-                ];
-            }
+            $certificate = Certificate::find($certificate_id);
+            $certificate->subjects()->sync($middle_school_subject_ids);
         }
+
         foreach ($high_school_ids as $certificate_id) {
-            foreach ($high_school_subject_ids as $subject_id) {
-                $data[] = [
-                    'certificate_id' => $certificate_id,
-                    'subject_id' => $subject_id,
-                ];
-            }
+            $certificate = Certificate::find($certificate_id);
+            $certificate->subjects()->sync($high_school_subject_ids);
         }
-        DB::table('certificate_subject')->truncate();
-        DB::table('certificate_subject')->insert($data);
     }
 }

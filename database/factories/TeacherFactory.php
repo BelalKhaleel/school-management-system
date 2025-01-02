@@ -33,8 +33,7 @@ class TeacherFactory extends Factory
             'address' => fake()->address(),
             'date_of_birth' => fake()->dateTimeBetween('-40 years', '-20 years')->format('Y-m-d'),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => fake()->password(8, 20),
+            'password' => bcrypt(fake()->password(8, 20)),
             'gender_id' => $gender_id,
             'nationality_id' => $nationality_id,
         ];
