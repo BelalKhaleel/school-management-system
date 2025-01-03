@@ -63,7 +63,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <input class="form-control" id="exampleInputPassword1" placeholder="Email"
-                                        type="email" name="email">
+                                        type="email" name="email" value="{{old('email')}}">
                                     </div>
                                     @error('email')
                                         <p @style([
