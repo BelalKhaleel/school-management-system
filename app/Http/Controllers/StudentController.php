@@ -13,10 +13,12 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return response()->json([
-            'success' => true,
-            'students' => Student::all(),
-        ]);
+        $students = Student::paginate(15);
+        return view('admin.students', ['students' => $students]);
+        // return response()->json([
+        //     'success' => true,
+        //     'students' => Student::all(),
+        // ]);
     }
 
     /**

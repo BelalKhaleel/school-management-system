@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
             $table->unsignedTinyInteger('grade');
-            $table->foreignId('student_id')->constrained();
+            $table->foreignId('student_id')->constrained('users');
+            $table->foreignId('teacher_id')->constrained('users');
             $table->foreignId('subject_id')->constrained();
-            $table->foreignId('teacher_id')->constrained();
             $table->foreignId('classroom_id')->constrained();
             $table->timestamps();
         });

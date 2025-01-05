@@ -14,10 +14,24 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::firstOrCreate([
-            'username' => 'admin',
-            'email' => 'school_admin@school.com',
+            'first_name' => 'Belal',
+            'last_name' => 'Khaleel',
+            'email' => 'admin@school.com',
             'password' => bcrypt('@o1min'),
-            'is_admin' => true,
-        ]);
+        ])->assignRole('admin');
+
+        User::factory()
+                ->count(20)
+                ->create()
+                ->each(function ($user) {
+                    $user->assignRole('teacher');
+                });
+
+        User::factory()
+                ->count(100)
+                ->create()
+                ->each(function ($user) {
+                    $user->assignRole('student');
+                });
     }
 }

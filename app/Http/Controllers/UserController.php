@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -13,10 +12,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        return response()->json([
-            'success' => true,
-            'users' => User::all(),
-        ]);
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -24,23 +28,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'username' => 'string|max:20',
-            'email' => 'required|email',
-            'password' => Password::min(8)
-                            ->letters()
-                            ->mixedCase()
-                            ->numbers()
-                            ->symbols()
-                            ->uncompromised(3),
-        ]);
-        $validated['password'] = bcrypt($validated['password']);
-        $user = User::create($validated);
-        return response()->json([
-            'success' => true,
-            'message' => 'User created successfully',
-            'user' => $user,
-        ]);
+        //
     }
 
     /**
@@ -48,10 +36,15 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return response()->json([
-            'success' => true,
-            'user' => $user,
-        ]);
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(User $user)
+    {
+        //
     }
 
     /**
@@ -59,22 +52,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validated = $request->validate([
-            'username' => 'string|max:20',
-            'email' => 'required|email',
-            'password' => 'required|string|max:20',
-        ]);
-        $password = bcrypt($request->input('password'));
-        $user->update([
-            'username' => $validated['username'],
-            'email' => $validated['email'],
-            'password' => $password,
-        ]);
-        return response()->json([
-            'success' => true,
-            'message' => 'User updated successfully',
-            'user' => $user,
-        ]);
+        //
     }
 
     /**
@@ -82,10 +60,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return response()->json([
-            'success' => true,
-            'message' => 'User deleted successfully',
-        ]);
+        //
     }
 }

@@ -16,9 +16,7 @@ class CheckUserIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->is_admin) {
-            return redirect('/dashboard');
-        } else {
+        if(! Auth::user()->is_admin) {
             return redirect('/');
         }
         return $next($request);
