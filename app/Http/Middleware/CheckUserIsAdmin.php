@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,8 @@ class CheckUserIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(! Auth::user()->is_admin) {
+        $user = User::find(Auth::user()->id);
+        if(! $user->hasRole('admin')) {
             return redirect('/');
         }
         return $next($request);
