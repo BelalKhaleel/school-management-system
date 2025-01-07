@@ -31,7 +31,8 @@ class StudentController extends Controller
     {
         $genders = Gender::all();
         $nationalities = Nationality::all();
-        return view('partials.student-form', ['genders' => $genders, 'nationalities' => $nationalities]);
+        $classrooms = Classroom::whereColumn('number_of_students', '<', 'max_number_of_students')->get();
+        return view('partials.student-form', ['genders' => $genders, 'nationalities' => $nationalities, 'classrooms' => $classrooms]);
     }
 
     /**
@@ -55,22 +56,19 @@ class StudentController extends Controller
                             ->symbols(),
             'gender_id' => 'required|integer|exists:genders,id',
             'nationality_id' => 'required|integer|exists:nationalities,id',
-            // 'classroom_id' => 'required|integer|exists:classroom,id',
+            'classroom_id' => 'required|integer|exists:classroom,id',
         ]);
         $validated['password'] = bcrypt($validated['password']);
-        $student = User::create($validated);
-        $student->assignRole('student');
-        // $class = Classroom::find($validated['classroom_id']);
-        // if($class->number_of_students < $class->max_number_of_students) {
-        //     $class->update([
-        //         'number_of_students' => $class->number_of_students + 1,
-        //     ]);
-        // }
-        return response()->json([
-            'success' => true,
-            'message' => 'Student created successfully',
-            'student' => $student,
-        ]);
+        $class = Classroom::find($validated['classroom_id']);
+        if($class->number_of_students < $class->max_number_of_students) {
+            $class->update([
+                    'number_of_students' => $class->number_of_students + 1,
+                ]);
+            $student = User::create($validated);
+            $student->assignRole('student');
+            return to_route('students.index')->with(['success' => 'Student added successfully']);
+        }
+        return redirect()->back()->with(['error' => 'This class is full']);
     }
 
     /**

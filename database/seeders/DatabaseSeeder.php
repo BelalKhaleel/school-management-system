@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
+use App\Models\Section;
 use App\Models\Subject;
 use App\Models\Department;
 use App\Models\Certificate;
@@ -36,8 +37,10 @@ class DatabaseSeeder extends Seeder
             TermSeeder::class,
             DepartmentSeeder::class,
             SubjectSeeder::class,
+            SectionSeeder::class,
             CertificateDepartmentSeeder::class,
             CertificateSubjectSeeder::class,
+            ClassroomSeeder::class,
         ]);   
     }
 }

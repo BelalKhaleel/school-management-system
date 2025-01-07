@@ -81,7 +81,7 @@ class CertificateDepartmentSeeder extends Seeder
 
         $data = array_merge($EB_array, $other_certificate_department_array);
         
-        DB::table('certificate_department')->truncate();
+        DB::table('certificate_department')->delete();
         DB::table('certificate_department')->insert($data);
     }
 }

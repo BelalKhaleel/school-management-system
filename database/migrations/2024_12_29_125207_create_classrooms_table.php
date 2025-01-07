@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::create('classrooms', function (Blueprint $table) {
             $table->id();
             $table->foreignId('language_id')->constrained();
-            $table->foreignId('certificate_id')->constrained();
-            $table->foreignId('department_id')->constrained();
             $table->foreignId('section_id')->constrained();
-            $table->unsignedTinyInteger('room_number')->unique();
+            $table->string('room_number')->unique();
             $table->unsignedTinyInteger('number_of_students');
             $table->unsignedTinyInteger('max_number_of_students');
             $table->string('school_year', 11);

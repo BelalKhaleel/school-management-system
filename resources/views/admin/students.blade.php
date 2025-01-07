@@ -39,10 +39,12 @@
           <td>{{ $student->email }}</td>
           <td>{{ $student->gender->gender }}</td>
           <td>{{ $student->nationality->nationality }}</td>
-          {{-- <td>{{ $student->classroom->classroom }}</td> --}}
+          @isset($student->classroom)
+            <td>{{ $student->classroom->room_number }}</td>
+          @endisset
         </tr>
       @empty
-        
+        {{'No students'}}
       @endforelse
     </tbody>
   </table>

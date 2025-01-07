@@ -56,7 +56,7 @@ class User extends Authenticatable
         return $this->belongsTo(Nationality::class);
     }
 
-    public function class(): BelongsTo
+    public function classroom(): BelongsTo
     {
         return $this->belongsTo(Classroom::class);
     }

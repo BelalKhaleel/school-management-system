@@ -170,6 +170,20 @@
       @enderror
     </div>
 
+    <!-- Class ID -->
+    <div class="mb-3">
+      <label for="classroom_id" class="form-label">Classroom</label>
+      <select class="form-select" id="classroom_id" name="classroom_id">
+        <option value="">Select classroom</option>
+        @foreach ($classrooms as $classroom)
+          <option value="{{$classroom->id}}" >{{$classroom->room_number}}</option>
+        @endforeach
+      </select>
+      @error('classroom_id')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+    </div>
+
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
