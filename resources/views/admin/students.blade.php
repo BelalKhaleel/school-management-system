@@ -30,10 +30,19 @@
           <td>{{ $student->first_name }}</td>
           <td>{{ $student->last_name }}</td>
           <td>{{ $student->classroom->room_number ?? 'none' }}</td>
-          <td>
+          <td @class([
+            'd-flex', 
+            'p-2', 
+            'gap-3',
+            ])>
             <a href="{{route('students.show', $student)}}">
               <button type="button" class="btn btn-info">Info</button>
             </a>
+            <form action="{{route('students.destroy', $student)}}" method="POST">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
           </td>
         </tr>
       @empty

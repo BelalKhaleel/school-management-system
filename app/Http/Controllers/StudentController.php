@@ -119,15 +119,9 @@ class StudentController extends Controller
     {
         if(User::role('student')) {
             $student->delete();
-            return response()->json([
-                'success' => true,
-                'message' => 'Student deleted successfully',
-            ]);
+            return to_route('students.index');
         } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'The deleted user is not a student',
-            ]);
+            return redirect()->back();
         }
     }
 }
