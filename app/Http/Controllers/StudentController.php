@@ -56,7 +56,7 @@ class StudentController extends Controller
                             ->symbols(),
             'gender_id' => 'required|integer|exists:genders,id',
             'nationality_id' => 'required|integer|exists:nationalities,id',
-            'classroom_id' => 'required|integer|exists:classroom,id',
+            'classroom_id' => 'required|integer|exists:classrooms,id',
         ]);
         $validated['password'] = bcrypt($validated['password']);
         $class = Classroom::find($validated['classroom_id']);
@@ -68,7 +68,7 @@ class StudentController extends Controller
             $student->assignRole('student');
             return to_route('students.index')->with(['success' => 'Student added successfully']);
         }
-        return redirect()->back()->with(['error' => 'This class is full']);
+        return redirect()->back();
     }
 
     /**
@@ -76,10 +76,7 @@ class StudentController extends Controller
      */
     public function show(User $student)
     {
-        return response()->json([
-            'success' => true,
-            'student' => $student,
-        ]);
+        return view('admin.student', ['student' => $student]);
     }
 
     /**
