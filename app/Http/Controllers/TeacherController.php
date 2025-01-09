@@ -108,20 +108,8 @@ class TeacherController extends Controller
      */
     public function show(User $teacher)
     {
-        $class_ids = DB::table('classroom_teacher')
-            ->where('teacher_id', '=', $teacher->id)
-            ->pluck('classroom_id');
-        $classes = DB::table('classrooms')
-            ->whereIn('id', $class_ids)
-            ->pluck('room_number')
-            ->toArray();
-        $subject_ids = DB::table('subject_teacher')
-            ->where('teacher_id', '=', $teacher->id)
-            ->pluck('subject_id');
-        $subjects = DB::table('subjects')
-            ->whereIn('id', $subject_ids)
-            ->pluck('subject')
-            ->toArray();
+        $classes = $teacher->classrooms->pluck('room_number')->toArray();
+        $subjects = $teacher->subjects->pluck('subject')->toArray();
         return view(
             'admin.teacher',
             [
