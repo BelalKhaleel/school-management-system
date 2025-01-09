@@ -24,7 +24,7 @@ class AuthController extends Controller
                             // ->uncompromised(3),
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->has('remember-me'))) {
             $request->session()->regenerate();
             $user = User::find(Auth::user()->id);
          if ($user->hasRole('admin')) {

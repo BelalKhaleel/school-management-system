@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <title>Add Student</title>
+  <title>Add Teacher</title>
 </head>
 <body>
-  <h1 class="text-center">Add Student</h1>
-  <form action="{{route('students.store')}}" method="POST" @class([
+  <h1 class="text-center">Add Teacher</h1>
+  <form action="{{route('teachers.store')}}" method="POST" @class([
     'w-25',
     'mx-auto',
   ])>
@@ -170,11 +170,11 @@
       @enderror
     </div>
 
-    <!-- Class ID -->
+    <!-- Class(es) ID -->
     <div class="mb-3">
-      <label for="classroom_id" class="form-label">Classroom</label>
-      <select class="form-select" id="classroom_id" name="classroom_id">
-        <option value="" disabled>Select classroom</option>
+      <label for="classroom_id" class="form-label">Classroom(s)</label>
+      <select class="form-select" id="classroom_id" name="classroom_ids[]" multiple>
+        <option value="" disabled>Select Classroom(s)</option>
         @foreach ($classrooms as $classroom)
           <option value="{{$classroom->id}}" >{{$classroom->room_number}}</option>
         @endforeach
@@ -184,8 +184,31 @@
       @enderror
     </div>
 
+    <!-- Subject(s) ID -->
+    <div class="mb-3">
+      <label for="subject_id" class="form-label">subject(s)</label>
+      <select class="form-select" id="subject_id" name="subject_ids[]" multiple>
+        <option value="" disabled>Select Subject(s)</option>
+        @foreach ($subjects as $subject)
+          <option value="{{$subject->id}}" >{{$subject->subject}}</option>
+        @endforeach
+      </select>
+      @error('subject_id')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+    </div>
+
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
