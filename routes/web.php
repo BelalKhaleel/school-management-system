@@ -10,7 +10,7 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function() {
-    return view('home');
+    return redirect('/');
 });
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');

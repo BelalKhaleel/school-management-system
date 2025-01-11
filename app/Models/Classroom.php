@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Classroom extends Model
@@ -29,5 +30,10 @@ class Classroom extends Model
     public function grades(): HasMany 
     {
         return $this->hasMany(Grade::class);
+    }
+
+    public function certificate(): BelongsTo
+    {
+        return $this->belongsTo(Certificate::class);
     }
 }

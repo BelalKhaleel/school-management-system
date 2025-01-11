@@ -22,6 +22,11 @@ class Certificate extends Model
         return $this->hasMany(Student::class);
     }
 
+    public function classrooms(): HasMany
+    {
+        return $this->hasMany(Classroom::class);
+    }
+
     public function subjects(): BelongsToMany
     {
         return $this->belongsToMany(Subject::class);

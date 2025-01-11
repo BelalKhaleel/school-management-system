@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('language_id')->constrained();
             $table->foreignId('section_id')->constrained();
+            $table->foreignId('certificate_id')->constrained();
+            $table->foreignId('department_id')->constrained();
             $table->string('room_number')->unique();
             $table->unsignedTinyInteger('number_of_students');
             $table->unsignedTinyInteger('max_number_of_students');

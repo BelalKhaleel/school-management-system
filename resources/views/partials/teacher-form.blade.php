@@ -9,6 +9,11 @@
 </head>
 <body>
   <h1 class="text-center">Add Teacher</h1>
+  @session('error')
+    <div class="alert alert-danger" role="alert">
+      {{ $value }}
+    </div>
+  @endsession
   <form action="{{route('teachers.store')}}" method="POST" @class([
     'w-25',
     'mx-auto',

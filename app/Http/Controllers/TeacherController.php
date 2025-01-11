@@ -7,6 +7,7 @@ use App\Models\Gender;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\Classroom;
+use App\Models\Certificate;
 use App\Models\Nationality;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -81,26 +82,33 @@ class TeacherController extends Controller
         $subjects_ids = $validated['subject_ids'];
         sort($subjects_ids);
         unset($validated['subject_ids']);
+        $certificate_ids = Classroom::whereIn('id', $classrooms_ids)
+                                    ->pluck('certificate_id')
+                                    ->unique()
+                                    ->toArray();
+        $subject_ids = Certificate::whereIn('id', $certificate_ids)
+                                    ->with('subjects')
+                                    ->get()
+                                    ->pluck('subjects.*.id')
+                                    ->flatten()
+                                    ->unique()
+                                    ->toArray();
+        // print_r($subjects_ids) . "<br>";
+        // print_r($subject_ids) . "<br>";
+        // return;
+        foreach($subjects_ids as $subject_id) {
+            if(! in_array($subject_id, $subject_ids)) {
+                return to_route('teachers.create')->with([
+                    'error' => 'Subjects are not compatible with the classes selected',
+                ]);
+            }
+        }
         $teacher = User::create($validated);
         $teacher->assignRole('teacher');
-        foreach ($classrooms_ids as $classroom_id) {
-            DB::table('classroom_teacher')->insert([
-                'classroom_id' => $classroom_id,
-                'teacher_id' => $teacher->id,
-            ]);
-        }
-        foreach ($subjects_ids as $subject_id) {
-            DB::table('subject_teacher')->insert([
-                'subject_id' => $subject_id,
-                'teacher_id' => $teacher->id,
-            ]);
-        }
-        return to_route('teachers.index');
-        // return response()->json([
-        //     'success' => true,
-        //     'message' => 'Teacher created successfully',
-        //     'teacher' => $teacher,
-        // ]);
+        $teacher->classrooms()->sync($classrooms_ids);
+        $teacher->subjects()->sync($subjects_ids);
+        
+        return to_route('teachers.index')->with(['success' => 'Teacher added successfully']);
     }
 
     /**
